@@ -68,3 +68,48 @@ class BoundingBox:
             else:
                 self.n = (self.n + self.s)/2
             hashCopy = hashCopy[2:]
+
+    def surroundingBoxesList(self):
+        theList = []
+        try:
+            NORTH = GeoPoint(self.n + self.getHeight()/2, (self.e + self.w)/2, self.precision).getHash()
+            theList.append(NORTH)
+        except:
+            pass
+        try:
+            SOUTH = GeoPoint(self.s - self.getHeight()/2, (self.e + self.w)/2, self.precision).getHash()
+            theList.append(SOUTH)
+        except:
+            pass
+        try:
+            NORTHEAST = GeoPoint(self.n + self.getHeight()/2, (self.e + self.getWidth())/2, self.precision).getHash()
+            theList.append(NORTHEAST)
+        except:
+            pass
+        try:
+            SOUTHEAST = GeoPoint(self.s - self.getHeight()/2, (self.e - self.getWidth())/2, self.precision).getHash()
+            theList.append(SOUTHEAST)
+        except:
+            pass
+        try:
+            NORTHWEST = GeoPoint(self.n + self.getHeight()/2, (self.w - self.getWidth())/2, self.precision).getHash()
+            theList.append(NORTHWEST)
+        except:
+            pass
+        try:
+            SOUTHWEST = GeoPoint(self.s - self.getHeight()/2, (self.w - self.getWidth())/2, self.precision).getHash()
+            theList.append(SOUTHWEST)
+        except:
+            pass
+        try:
+            EAST = GeoPoint(self.n + self.s/2, self.e + self.getWidth()/2, self.precision).getHash()
+            theList.append(EAST)
+        except:
+            pass
+        try:
+            WEST = GeoPoint(self.n + self.s/2, self.w - self.getWidth()/2, self.precision).getHash()
+            theList.append(WEST)
+        except:
+            pass
+        theList.add(hash);
+        return theList;
